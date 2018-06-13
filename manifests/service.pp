@@ -36,7 +36,7 @@ class pgpool::service {
 
   $pgpool_service_name = $::pgpool::service_name_real
 
-  if $::osfamily = 'FreeBSD' {
+  if $::osfamily == 'FreeBSD' {
     $service_enable = $::pgpool::service_enable_real ? {
       false   => 'NO',
       default => 'YES',
