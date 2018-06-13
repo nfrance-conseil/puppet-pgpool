@@ -49,9 +49,10 @@ class pgpool::config {
   }
 
   $defaults_dir = $::osfamily ? {
-    /RedHat/ => '/etc/sysconfig',
-    /Debian/ => '/etc/default',
-    default  => '/etc/sysconfig',
+    /RedHat/  => '/etc/sysconfig',
+    /Debian/  => '/etc/default',
+    /FreeBSD/ => '/etc/rc.local.d',
+    default   => '/etc/sysconfig',
   }
 
   $pgpool_sysconfig_file = "${defaults_dir}/${::pgpool::service::pgpool_service_name}"
