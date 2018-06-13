@@ -80,7 +80,7 @@ class pgpool::config {
     notify => Exec['pgpool_reload']
   }
 
-  if ::osfamily !~ /BSD/ {
+  if ::osfamily != 'FreeBSD' {
     file { $pgpool_sysconfig_file:
       ensure => $::pgpool::file_ensure,
       notify => Service['pgpool']
