@@ -111,7 +111,7 @@ class pgpool::config {
 
   if $::osfamily == 'FreeBSD' {
     file { $pid_dir:
-      ensure => $::pgpool::file_ensure,
+      ensure => directory,
       owner  => $::pgpool::log_user,
       group  => $::pgpool::log_group,
       mode   => '755',
