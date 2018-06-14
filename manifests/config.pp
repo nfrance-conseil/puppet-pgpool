@@ -60,6 +60,7 @@ class pgpool::config {
   $pcp_file = "${config_dir}/pcp.conf"
   $pool_hba_file = "${config_dir}/pool_hba.conf"
   $log_dir = "/var/log/${::pgpool::service::pgpool_service_name}"
+  $pid_dir = '/var/run/pgpool'
 
   File {
     owner => $::pgpool::service_user,
@@ -106,5 +107,14 @@ class pgpool::config {
     ensure => $::pgpool::directory_ensure,
     owner  => $::pgpool::log_user,
     group  => $::pgpool::log_group,
+  }
+
+  if $::osfamily == 'FreeBSD' {
+    file { $pid_dir:
+      ensure => $::pgpool::file_ensure,
+      owner  => $::pgpool::log_user,
+      group  => $::pgpool::log_group,
+      mode   => '755',
+    }
   }
 }
